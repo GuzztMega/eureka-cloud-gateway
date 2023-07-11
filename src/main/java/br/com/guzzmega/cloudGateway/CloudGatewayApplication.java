@@ -21,6 +21,7 @@ public class CloudGatewayApplication {
 	public RouteLocator routes(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route(r -> r.path("/customers/**").uri("lb://eureka-client"))
+				.route(r -> r.path("/cards/**").uri("lb://eureka-card"))
 				.build();
 	}
 
