@@ -22,6 +22,7 @@ public class CloudGatewayApplication {
 		return builder.routes()
 				.route(r -> r.path("/customers/**").uri("lb://eureka-client"))
 				.route(r -> r.path("/cards/**").uri("lb://eureka-card"))
+				.route(r -> r.path("/credits/**").uri("lb://eureka-credit"))
 				.build();
 	}
 
