@@ -3,10 +3,34 @@ spring:
     name: cloud-gateway
   cloud:
     gateway:
+      routes:
+        - id: customer
+          uri: http://127.0.0.1:8088
+          predicates:
+            - Path=/customer/**
+          filters:
+            - RewritePath=/customer/(?<path>.*), /$\{path}
+        - id: card
+          uri: http://127.0.0.1:8088
+          predicates:
+            - Path=/card/**
+          filters:
+            - RewritePath=/card/(?<path>.*), /$\{path}
+        - id: credit
+          uri: http://127.0.0.1:8088
+          predicates:
+            - Path=/credit/**
+          filters:
+            - RewritePath=/credit/(?<path>.*), /$\{path}
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:8090/realms/eureka-realm
 
 server:
   port: 8088
@@ -16,6 +40,4 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
-
-
+      defaultZone: http://eureka-microservices-admin:akeruesecivresorcimnimda@127.0.0.1:8761/eureka
