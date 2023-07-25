@@ -25,5 +25,4 @@ public class CloudGatewayApplication {
 				.route(r -> r.path("/credits/**").uri("lb://eureka-credit"))
 				.build();
 	}
-
 }

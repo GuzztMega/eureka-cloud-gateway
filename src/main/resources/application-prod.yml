@@ -5,19 +5,19 @@ spring:
     gateway:
       routes:
         - id: customer
-          uri: http://127.0.0.1:8088
+          uri: http://${EUREKA_SERVER}
           predicates:
             - Path=/customer/**
           filters:
             - RewritePath=/customer/(?<path>.*), /$\{path}
         - id: card
-          uri: http://127.0.0.1:8088
+          uri: http://${EUREKA_SERVER}
           predicates:
             - Path=/card/**
           filters:
             - RewritePath=/card/(?<path>.*), /$\{path}
         - id: credit
-          uri: http://127.0.0.1:8088
+          uri: http://${EUREKA_SERVER}
           predicates:
             - Path=/credit/**
           filters:
@@ -30,7 +30,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://127.0.0.1:8090/realms/eureka-realm
+          issuer-uri: http://${KEYCLOAK_SERVER}:${KEYCLOAK_PORT}/realms/eureka-realm
 
 server:
   port: 8088
@@ -40,4 +40,4 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://eureka-microservices-admin:akeruesecivresorcimnimda@127.0.0.1:8761/eureka
+      defaultZone: http://${EUREKA_USER}:${EUREKA_PASS}@${EUREKA_SERVER}:8761/eureka
